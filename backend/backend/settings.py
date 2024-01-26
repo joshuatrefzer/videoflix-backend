@@ -12,9 +12,10 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+BASE_URL = 'http://localhost:8000' 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -27,6 +28,23 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+CORS_ALLOWED_HOSTS = [
+    'localhost'
+]
+
+CORS_ALLOWED_ORIGINS = [
+     'https://localhost'
+]
+
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT =  587  
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = "Videoflix@noreply"
+EMAIL_HOST_USER =   'jt.fullstack.development@gmail.com'
+EMAIL_HOST_PASSWORD =  'nxdnjbkkgwymxpf'
 
 # Application definition
 
@@ -38,12 +56,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'users',
-     'rest_framework',
+    'rest_framework',
+    'corsheaders'
 ]
 
 AUTH_USER_MODEL = 'users.CustomUser'
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -53,13 +73,19 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+
+
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.@gmail.com'
+EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT =  587  #465
 EMAIL_USE_TLS = True
+# EMAIL_USE_SSL = False
 DEFAULT_FROM_EMAIL = "Videoflix"
-EMAIL_HOST_USER = 'jt.fullstack.development@gmail.com' # os.environ.get("DEVMAIL")
-EMAIL_HOST_PASSWORD = 'wlmpidgnwdttwwfd'   #os.environ.get("DEVPW")  
+EMAIL_HOST_USER = 'email'
+EMAIL_HOST_PASSWORD = 'pw'
+
+
+
 
 ROOT_URLCONF = 'backend.urls'
 
