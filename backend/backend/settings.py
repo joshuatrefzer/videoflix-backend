@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -27,7 +28,6 @@ SECRET_KEY = 'django-insecure-zv*r+2ol!&m#cd8g9^@_rqnang&p9&=rfmfnp6@f6l8z_&zv5c
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 CORS_ALLOWED_HOSTS = [
     'localhost'
 ]
@@ -37,14 +37,13 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 
-
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT =  587  
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = "Videoflix@noreply"
-EMAIL_HOST_USER =   'jt.fullstack.development@gmail.com'
-EMAIL_HOST_PASSWORD =  'nxdnjbkkgwymxpf'
+EMAIL_HOST_USER =   os.environ.get("DEVMAIL")
+EMAIL_HOST_PASSWORD =  os.environ.get("DEVPW")  
 
 # Application definition
 
@@ -57,6 +56,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'users',
     'rest_framework',
+    'rest_framework.authtoken',
     'corsheaders'
 ]
 
@@ -76,14 +76,13 @@ MIDDLEWARE = [
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'     
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT =  587  #465
+EMAIL_PORT =  587  
 EMAIL_USE_TLS = True
-# EMAIL_USE_SSL = False
 DEFAULT_FROM_EMAIL = "Videoflix"
-EMAIL_HOST_USER = 'email'
-EMAIL_HOST_PASSWORD = 'pw'
-
+EMAIL_HOST_USER =   os.environ.get('DEVMAIL')
+EMAIL_HOST_PASSWORD =  os.environ.get('DEVPW')  
 
 
 
