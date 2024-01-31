@@ -40,7 +40,11 @@ def register(request):
         email = EmailMultiAlternatives(subject, plain_message, settings.EMAIL_HOST_USER, [user.email])
         email.attach_alternative(html_message, "text/html")
         email.send()
-
+        
+        #Erst wenn Frontend fertig ist -> Success Seite, die zum Login weiterleitet
+        # success_frontend_url = 'https://dev.joshuatrefzer.com/videoflix/login'  # Adjust the URL to your frontend setup
+        # return redirect(success_frontend_url)
+        
         return Response({'success': 'Registration successful. A confirmation email has been sent.'}, status=status.HTTP_201_CREATED)
 
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -88,7 +92,7 @@ def activate_account(request, confirmation_token):
     return Response({'success': 'Account successfully activated.', 'token': token.key, 'user': user.username}, status=status.HTTP_200_OK)   
 
 
-
+    
 @api_view(['POST'])
 def login(request):
     user = get_object_or_404(CustomUser, username =request.data['username'])
