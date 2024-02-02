@@ -72,6 +72,8 @@ INSTALLED_APPS = [
     "rest_framework.authtoken",
     "corsheaders",
     "debug_toolbar",
+    "django_rq",
+    "import_export",
 ]
 
 AUTH_USER_MODEL = "users.CustomUser"
@@ -87,6 +89,17 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+
+
+RQ_QUEUES = {
+    'default': {
+        'HOST': 'localhost',
+        'PORT': 6379,
+        'DB': 0,
+        'DEFAULT_TIMEOUT': 360,
+    },
+}
+
 
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
@@ -179,6 +192,9 @@ USE_I18N = True
 
 USE_TZ = True
 
+IMPORT_EXPORT_USE_TRANSACTIONS = True
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/staticfiles')
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/

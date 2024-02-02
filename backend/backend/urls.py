@@ -23,6 +23,7 @@ from videos.views import get_videos
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('django-rq/', include('django_rq.urls')),
     path("__debug__/", include("debug_toolbar.urls")),
     path('users/', include('users.urls')),
     path('api/videos/', get_videos, name='get_videos'),
