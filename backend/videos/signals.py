@@ -34,11 +34,11 @@ def auto_delete_file_on_delete(sender, instance,  **kwargs):
 def remove_files(file_path):
     os.remove(file_path)
     try:
-        os.remove(f'{file_path}_480p.mp4')
+        os.remove(f'{file_path.rstrip(".mp4")}_480p.mp4')
     except: 
         print('No Video in 480p')
     try:
-        os.remove(f'{file_path}_720p.mp4')
+        os.remove(f'{file_path.rstrip(".mp4")}_720p.mp4')
     except:
         print('No Video in 720p')
     

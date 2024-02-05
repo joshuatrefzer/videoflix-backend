@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework import status
 
 from django.conf import settings
 from django.core.cache.backends.base import DEFAULT_TIMEOUT
@@ -20,6 +21,21 @@ def get_videos(request):
         videos = Video.objects.all()
         serializer = VideoSerializer(videos, many=True)
 
-        return Response({'status': 'success', 'videos': serializer.data})
+        return Response(serializer.data)
     except Exception as e:
         return Response({'status': 'error', 'message': str(e)}, status=500)
+    
+
+@api_view(['POST'])
+def upload_video(request):
+    try:
+        serializer = VideoSerializer(data=request.data)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'status': 'success', 'message': 'Video uploaded successfully'}, status=status.HTTP_201_CREATED)
+        else:
+            return Response({'status': 'error', 'message': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+    except Exception as e:
+        return Response({'status': 'error', 'message': str(e)}, status=500)
+

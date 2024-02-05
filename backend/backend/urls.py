@@ -19,7 +19,7 @@ from django.urls import path
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from videos.views import get_videos
+from videos.views import get_videos, upload_video
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,4 +27,5 @@ urlpatterns = [
     path("__debug__/", include("debug_toolbar.urls")),
     path('users/', include('users.urls')),
     path('api/videos/', get_videos, name='get_videos'),
+    path('api/upload/' , upload_video, name='upload')
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
