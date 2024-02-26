@@ -15,7 +15,7 @@ from .serializers import VideoSerializer
 CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
 
 
-@cache_page(CACHE_TTL)
+# @cache_page(CACHE_TTL)
 @api_view(['GET'])
 def get_videos(request):
     try:

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 import secrets
 
 # Create your views here.
@@ -8,7 +8,10 @@ from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
+
+from backend.settings import CLIENT_BASE_URL
 from .models import CustomUser
+from django.contrib.auth import authenticate
 from .serializers import UserSerializer
 from rest_framework.authtoken.models import Token
 from django.core.mail import EmailMultiAlternatives
@@ -27,6 +30,8 @@ def register(request):
         user = serializer.save()
         user.set_password(request.data['password'])
         user.is_activated = False
+        user.first_name = request.data['first_name']
+        user.last_name = request.data['last_name']
         user.confirmation_token = generate_token()
         user.save()
 
@@ -41,36 +46,11 @@ def register(request):
         email.attach_alternative(html_message, "text/html")
         email.send()
         
-        #Erst wenn Frontend fertig ist -> Success Seite, die zum Login weiterleitet
-        # success_frontend_url = 'https://dev.joshuatrefzer.com/videoflix/login'  # Adjust the URL to your frontend setup
-        # return redirect(success_frontend_url)
-        
         return Response({'success': 'Registration successful. A confirmation email has been sent.'}, status=status.HTTP_201_CREATED)
 
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-
-
-# @api_view(['POST'])
-# @permission_classes([AllowAny])
-# def register(request):
-#     serializer = UserSerializer(data=request.data)
-#     if serializer.is_valid():
-#         user = serializer.save()
-#         user.set_password(request.data['password'])
-#         user.is_activated = False
-#         user.confirmation_token = generate_token()
-#         user.save()
-
-#         # Send confirmation email
-#         subject = 'Activate Your Account'
-#         message = f'Click on the following link to activate your account: {settings.BASE_URL}/users/activate/{user.confirmation_token}/'
-#         send_mail(subject, message, settings.EMAIL_HOST_USER, [user.email])
-
-#         return Response({'success': 'Registration successful. A confirmation email has been sent.'}, status=status.HTTP_201_CREATED)
-
-#     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 def generate_token():
@@ -87,15 +67,20 @@ def activate_account(request, confirmation_token):
     token = Token.objects.create(user=user)
     user.confirmation_token = None
     user.save()
+    return redirect_to_success_site()
     
-    #Redirect to Login Page 
-    return Response({'success': 'Account successfully activated.', 'token': token.key, 'user': user.username}, status=status.HTTP_200_OK)   
 
 
-    
+def redirect_to_success_site():
+    success_frontend_url = CLIENT_BASE_URL + '/success'
+    return redirect(success_frontend_url)
+
+
+
+
 @api_view(['POST'])
 def login(request):
-    user = get_object_or_404(CustomUser, username =request.data['username'])
+    user = get_object_or_404(CustomUser, email =request.data['email'])
     if user.is_activated:
         if not user.check_password(request.data['password']):
             return Response({"detail": "Not found."} , status=status.HTTP_400_NOT_FOUND)
@@ -107,4 +92,7 @@ def login(request):
         return Response({"token": token_key, "user": serializer.data})
     else:
         return Response({"Your Account is not registred, or not activated yet"})
+
+
+
 

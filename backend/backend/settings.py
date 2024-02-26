@@ -19,6 +19,8 @@ INTERNAL_IPS = [
     # ...
 ]
 
+
+
 CACHE_TTL = 60 * 15
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -35,7 +37,11 @@ SECRET_KEY = "django-insecure-zv*r+2ol!&m#cd8g9^@_rqnang&p9&=rfmfnp6@f6l8z_&zv5c
 DEBUG = True
 
 ALLOWED_HOSTS = []
+
+CLIENT_BASE_URL = "http://localhost:4200"
+
 CORS_ALLOWED_HOSTS = ["localhost"]
+
 
 
 CORS_ALLOWED_ORIGINS = [
@@ -81,6 +87,8 @@ INSTALLED_APPS = [
 ]
 
 AUTH_USER_MODEL = "users.CustomUser"
+
+AUTHENTICATION_BACKENDS = ['users.backends.EmailBackend']
 
 MIDDLEWARE = [
     "debug_toolbar.middleware.DebugToolbarMiddleware",
