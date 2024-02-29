@@ -19,13 +19,14 @@ from django.urls import path
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from videos.views import get_videos, upload_video
+from videos.views import VideoView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('django-rq/', include('django_rq.urls')),
     path("__debug__/", include("debug_toolbar.urls")),
     path('users/', include('users.urls')),
-    path('api/videos/', get_videos, name='get_videos'),
-    path('api/upload/' , upload_video, name='upload')
+    path('api/videos/', VideoView.as_view(), name='get_videos'),
+    path('api/upload/' , VideoView.as_view(), name='upload'),
+    
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

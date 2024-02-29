@@ -79,6 +79,7 @@ def redirect_to_success_site():
 
 
 @api_view(['POST'])
+@permission_classes([AllowAny])
 def login(request):
     user = get_object_or_404(CustomUser, email =request.data['email'])
     if user.is_activated:
@@ -91,8 +92,42 @@ def login(request):
         serializer = UserSerializer(instance=user)
         return Response({"token": token_key, "user": serializer.data})
     else:
-        return Response({"Your Account is not registred, or not activated yet"})
+        return Response({"Your Account is not registered, or not activated yet"})
 
 
+@api_view(['POST'])
+def logout(request):
+    token_key = request.headers.get('Authorization').split()[1]
+
+    try:
+        token = Token.objects.get(key=token_key)
+    except Token.DoesNotExist:
+        return Response({"detail": "Invalid token."}, status=status.HTTP_400_BAD_REQUEST)
+
+    token.delete()
+
+    return Response({"detail": "Logged out successfully."})
 
 
+@api_view(['POST'])
+def delete_user(request):
+    # Extrahiere das Token aus dem Authorization-Header
+    token_key = request.headers.get('Authorization').split()[1]
+
+    try:
+        # Versuche, das Token im Backend zu finden
+        token = Token.objects.get(key=token_key)
+    except Token.DoesNotExist:
+        return Response({"detail": "Invalid token."}, status=status.HTTP_400_BAD_REQUEST)
+
+    # Lösche das Token, um es ungültig zu machen
+    token.delete()
+
+    try:
+        # Versuche, den Benutzer zu finden und zu löschen
+        user = CustomUser.objects.get(id=token.user_id)
+        user.delete()
+    except CustomUser.DoesNotExist:
+        return Response({"detail": "User not found."}, status=status.HTTP_400_BAD_REQUEST)
+
+    return Response({"detail": "User deleted successfully."})
