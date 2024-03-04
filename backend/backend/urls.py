@@ -19,7 +19,7 @@ from django.urls import path
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from videos.views import VideoView
+from videos.views import VideoView, SearchView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,5 +28,6 @@ urlpatterns = [
     path('users/', include('users.urls')),
     path('api/videos/', VideoView.as_view(), name='get_videos'),
     path('api/upload/' , VideoView.as_view(), name='upload'),
+    path('api/videos/search/' , SearchView.as_view(), name='search'),
     
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

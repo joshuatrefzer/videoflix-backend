@@ -16,6 +16,7 @@ from django.views.decorators.cache import cache_page
 from .models import Video
 from .serializers import VideoSerializer
 from rest_framework.permissions import IsAuthenticated
+from django.contrib.postgres.search import SearchQuery
 
 
 CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
@@ -55,4 +56,18 @@ class VideoView(APIView):
             return Response({'status': 'error', 'message': str(e)}, status=500)
         
         
-        
+class SearchView(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+    
+    def post(self, request):
+        value = request.data.get('search_title', None)
+        if value:
+            videos = self.search_videos(value)
+            serializer = VideoSerializer(videos, many=True)
+            return Response(serializer.data)
+        else: 
+            return Response("Search value not provided", status=status.HTTP_400_BAD_REQUEST)
+       
+    def search_videos(self, search_value):
+        return Video.objects.filter(title__icontains=search_value)
