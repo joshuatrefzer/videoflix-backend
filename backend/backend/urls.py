@@ -29,5 +29,6 @@ urlpatterns = [
     path('api/videos/', VideoView.as_view(), name='get_videos'),
     path('api/upload/' , VideoView.as_view(), name='upload'),
     path('api/videos/search/' , SearchView.as_view(), name='search'),
+    path('password_reset/', include('django_rest_passwordreset.urls', namespace='password_reset')),
     
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
