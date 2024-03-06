@@ -28,10 +28,12 @@ def register(request):
     
     if serializer.is_valid():
         user = serializer.save()
+        
         user.set_password(request.data['password'])
         user.is_activated = False
         user.first_name = request.data['first_name']
         user.last_name = request.data['last_name']
+        user.username = user.first_name + '_' + user.last_name
         user.confirmation_token = generate_token()
         user.save()
 

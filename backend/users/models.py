@@ -11,3 +11,5 @@ class CustomUser(AbstractUser):
     custom = models.CharField(max_length=1000, default='')
     adress = models.CharField(max_length=100, default='')
     phone = models.CharField(max_length=20, default='')
+    
+    
