@@ -27,13 +27,14 @@ def register(request):
     serializer = UserSerializer(data=request.data)
     
     if serializer.is_valid():
+        
         user = serializer.save()
         
         user.set_password(request.data['password'])
         user.is_activated = False
         user.first_name = request.data['first_name']
         user.last_name = request.data['last_name']
-        user.username = user.first_name + '_' + user.last_name
+        user.username = request.data['username']
         user.confirmation_token = generate_token()
         user.save()
 
@@ -94,7 +95,7 @@ def login(request):
         serializer = UserSerializer(instance=user)
         return Response({"token": token_key, "user": serializer.data})
     else:
-        return Response({"Your Account is not registered, or not activated yet"})
+        return Response({"detail": "Your Account is not registered, or not activated yet"}, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['POST'])
