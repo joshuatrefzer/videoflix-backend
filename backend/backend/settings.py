@@ -178,7 +178,7 @@ DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
         "NAME": "videoflix",
-        "USER": "postgres",
+        "USER": "myuser",
         "PASSWORD": "auschoj34",
         "HOST": "localhost",
         # "PORT": "5433",
