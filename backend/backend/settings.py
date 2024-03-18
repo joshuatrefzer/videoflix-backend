@@ -40,11 +40,16 @@ ALLOWED_HOSTS = []
 
 CLIENT_BASE_URL = "http://localhost:4200"
 
-CORS_ALLOWED_HOSTS = ["localhost"]
+CORS_ALLOWED_HOSTS = [
+    "localhost",
+    "joshua-trefzer.developerakademie.org"
+    
+    ]
 
 
 
 CORS_ALLOWED_ORIGINS = [
+    "joshua-trefzer.developerakademie.org",
     "http://localhost:4200",
     "https://localhost",
 ]
