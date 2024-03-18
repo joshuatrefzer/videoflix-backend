@@ -36,20 +36,20 @@ SECRET_KEY = "django-insecure-zv*r+2ol!&m#cd8g9^@_rqnang&p9&=rfmfnp6@f6l8z_&zv5c
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "joshua-trefzer.developerakademie.org",
+]
 
 CLIENT_BASE_URL = "http://localhost:4200"
 
 CORS_ALLOWED_HOSTS = [
     "localhost",
-    "joshua-trefzer.developerakademie.org"
-    
+    "joshua-trefzer.developerakademie.org",
     ]
 
 
 
 CORS_ALLOWED_ORIGINS = [
-    "joshua-trefzer.developerakademie.org",
     "http://localhost:4200",
     "https://localhost",
 ]
