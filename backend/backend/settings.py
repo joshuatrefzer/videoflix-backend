@@ -38,6 +38,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     "joshua-trefzer.developerakademie.org",
+    "https://joshua-trefzer.developerakademie.org"
 ]
 
 CLIENT_BASE_URL = "http://localhost:4200"
