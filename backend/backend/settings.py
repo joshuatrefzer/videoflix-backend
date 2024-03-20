@@ -61,8 +61,8 @@ EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = "Videoflix@noreply"
-EMAIL_HOST_USER = 'jt.fullstack.development@gmail.com' #os.environ.get("DEVMAIL")
-EMAIL_HOST_PASSWORD = 'vwdp mplj ceat uoio' #os.environ.get("DEVPW")
+EMAIL_HOST_USER = os.environ.get("DEVMAIL")
+EMAIL_HOST_PASSWORD = os.environ.get("DEVPW")
 
 # Application definition
 
