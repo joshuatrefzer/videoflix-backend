@@ -62,9 +62,9 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:4200",
     "https://localhost",
     "https://videoflix.joshuatrefzer.de" ,
+    "https://videoflix.joshuatrefzer.de/upload"
 ]
 
-CORS_URLS_REGEX = r'^/api/upload/$'
 
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
