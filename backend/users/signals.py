@@ -23,7 +23,7 @@ def password_reset_token_created(sender, instance, reset_password_token, *args, 
     """
     # send an e-mail to the user
     
-    reset_password_url = "https://localhost:4000/resetpassword/?token={}".format(
+    reset_password_url = CLIENT_BASE_URL + "/resetpassword/?token={}".format(
         reset_password_token.key
     )
     
