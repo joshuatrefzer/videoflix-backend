@@ -40,7 +40,7 @@ def register(request):
 
         # Render HTML template
         subject = 'Activate Your Account'
-        context = {'user': user, 'activation_link': f'{settings.BASE_URL}/users/activate/{user.confirmation_token}/'}
+        context = {'user': user, 'activation_link': f'{settings.HOST_BACKEND_URL}/users/activate/{user.confirmation_token}/'}
         html_message = render_to_string('confirmation_email.html', context)
         plain_message = strip_tags(html_message)
 
