@@ -44,7 +44,8 @@ DEBUG = True
 ALLOWED_HOSTS = [
     "joshua-trefzer.developerakademie.org",
     "https://joshua-trefzer.developerakademie.org",
-    "https://videoflix.joshuatrefzer.de" "videoflix.joshuatrefzer.de",
+    "https://videoflix.joshuatrefzer.de" ,
+    "videoflix.joshuatrefzer.de",
 ]
 
 CLIENT_BASE_URL = "https://videoflix.joshuatrefzer.de" #"http://localhost:4200"
