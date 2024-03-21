@@ -6,7 +6,7 @@ from django.urls import reverse
 
 from django_rest_passwordreset.signals import reset_password_token_created
 
-from backend.settings import CLIENT_BASE_URL
+from backend.settings import CLIENT_BASE_URL, HOST_BACKEND_URL
 
 
 @receiver(reset_password_token_created)
@@ -23,7 +23,7 @@ def password_reset_token_created(sender, instance, reset_password_token, *args, 
     """
     # send an e-mail to the user
     
-    reset_password_url = CLIENT_BASE_URL + "/resetpassword/?token={}".format(
+    reset_password_url = HOST_BACKEND_URL + "/resetpassword/?token={}".format(
         reset_password_token.key
     )
     

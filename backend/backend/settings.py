@@ -11,8 +11,12 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
-import getvar 
+import dotenv as env 
 import os
+from dotenv import load_dotenv
+
+dotenv_path = os.path.join(os.path.dirname(__file__), 'dotenv', '.env')
+load_dotenv(dotenv_path)
 
 INTERNAL_IPS = [
     # ...
@@ -65,9 +69,9 @@ EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = getvar.DEVMAIL
-EMAIL_HOST_USER = getvar.DEVMAIL
-EMAIL_HOST_PASSWORD = getvar.DEVPW
+DEFAULT_FROM_EMAIL = os.getenv("DEVMAIL")
+EMAIL_HOST_USER = os.getenv("DEVMAIL")
+EMAIL_HOST_PASSWORD = os.getenv("DEVPW")
 
 # Application definition
 
