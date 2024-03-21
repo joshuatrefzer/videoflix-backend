@@ -50,7 +50,10 @@ def register(request):
         try:
             email.send()
         except:
-            return Response({'error' :f'Failed to send mail! {settings.EMAIL_HOST_USER}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            usermail = user.email
+            user.delete()
+            return Response({'error' :f'Failed to send mail to: {usermail}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            
         
         return Response({'success': 'Registration successful. A confirmation email has been sent.'}, status=status.HTTP_201_CREATED)
 
