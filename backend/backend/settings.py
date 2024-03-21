@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import getvar 
 import os
 
 INTERNAL_IPS = [
@@ -24,7 +25,7 @@ CACHE_TTL = 60 * 15
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-BASE_URL = "http://localhost:8000"
+BASE_URL =  "https://joshua-trefzer.developerakademie.org" #"http://localhost:8000"
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -61,9 +62,9 @@ EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = os.environ.get("DEVMAIL")
-EMAIL_HOST_USER = os.environ.get("DEVMAIL")
-EMAIL_HOST_PASSWORD = os.environ.get("DEVPW")
+DEFAULT_FROM_EMAIL = getvar.DEVMAIL
+EMAIL_HOST_USER = getvar.DEVMAIL
+EMAIL_HOST_PASSWORD = getvar.DEVPW
 
 # Application definition
 
