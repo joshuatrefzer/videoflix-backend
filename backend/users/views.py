@@ -47,7 +47,10 @@ def register(request):
         # Send confirmation email
         email = EmailMultiAlternatives(subject, plain_message, settings.EMAIL_HOST_USER, [user.email])
         email.attach_alternative(html_message, "text/html")
-        email.send()
+        try:
+            email.send()
+        except:
+            return Response({'error' :f'Failed to send mail! {user.email}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         
         return Response({'success': 'Registration successful. A confirmation email has been sent.'}, status=status.HTTP_201_CREATED)
 
