@@ -63,6 +63,8 @@ CORS_ALLOWED_ORIGINS = [
     "https://videoflix.joshuatrefzer.de" ,
 ]
 
+CORS_URLS_REGEX = r'^/api/upload/$'
+
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"
