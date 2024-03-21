@@ -20,7 +20,6 @@ INTERNAL_IPS = [
 ]
 
 
-
 CACHE_TTL = 60 * 15
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -38,16 +37,18 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     "joshua-trefzer.developerakademie.org",
-    "https://joshua-trefzer.developerakademie.org"
+    "https://joshua-trefzer.developerakademie.org",
+    "https://videoflix.joshuatrefzer.de" "videoflix.joshuatrefzer.de",
 ]
 
-CLIENT_BASE_URL = "http://localhost:4200"
+CLIENT_BASE_URL = "https://videoflix.joshuatrefzer.de" #"http://localhost:4200"
 
 CORS_ALLOWED_HOSTS = [
     "localhost",
     "joshua-trefzer.developerakademie.org",
-    ]
-
+    "https://videoflix.joshuatrefzer.de" ,
+    "videoflix.joshuatrefzer.de",
+]
 
 
 CORS_ALLOWED_ORIGINS = [
@@ -90,27 +91,25 @@ INSTALLED_APPS = [
     "debug_toolbar",
     "django_rq",
     "import_export",
-    'django_rest_passwordreset',
+    "django_rest_passwordreset",
 ]
 
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication',
-        'rest_framework.authentication.BasicAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.TokenAuthentication",
+        "rest_framework.authentication.BasicAuthentication",
+        "rest_framework.authentication.SessionAuthentication",
     ],
-     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.IsAuthenticated",
     ],
-    
-
 }
 
 AUTH_USER_MODEL = "users.CustomUser"
 
-AUTHENTICATION_BACKENDS = ['users.backends.EmailBackend']
+AUTHENTICATION_BACKENDS = ["users.backends.EmailBackend"]
 
 MIDDLEWARE = [
     "debug_toolbar.middleware.DebugToolbarMiddleware",
@@ -193,7 +192,7 @@ DATABASES = {
 }
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://joshua-trefzer.developerakademie.org',
+    "https://joshua-trefzer.developerakademie.org",
 ]
 
 
