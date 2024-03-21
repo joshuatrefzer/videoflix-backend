@@ -60,8 +60,7 @@ CORS_ALLOWED_HOSTS = [
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:4200",
     "https://localhost",
-     "https://videoflix.joshuatrefzer.de" ,
-    "videoflix.joshuatrefzer.de",
+    "https://videoflix.joshuatrefzer.de" ,
 ]
 
 
