@@ -28,7 +28,7 @@ class VideoView(APIView):
     permission_classes = [IsAuthenticated]
     
     
-    @method_decorator(cache_page(CACHE_TTL))
+    # @method_decorator(cache_page(CACHE_TTL))
     def get(self, request):
         try:
             videos = Video.objects.all()
