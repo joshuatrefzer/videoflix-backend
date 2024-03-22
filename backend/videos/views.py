@@ -21,6 +21,9 @@ from django.contrib.postgres.search import SearchQuery
 
 CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
 
+def clear_cache():
+    cache.clear()
+
 
 class VideoView(APIView):
     
@@ -28,7 +31,7 @@ class VideoView(APIView):
     permission_classes = [IsAuthenticated]
     
     
-    # @method_decorator(cache_page(CACHE_TTL))
+    @method_decorator(cache_page(CACHE_TTL))
     def get(self, request):
         try:
             videos = Video.objects.all()
@@ -47,7 +50,7 @@ class VideoView(APIView):
 
             if serializer.is_valid():
                 serializer.save()
-                cache.clear()
+                clear_cache()
 
                 return Response({'status': 'success', 'message': 'Video uploaded successfully'}, status=status.HTTP_201_CREATED)
             else:
@@ -71,3 +74,5 @@ class SearchView(APIView):
        
     def search_videos(self, search_value):
         return Video.objects.filter(title__icontains=search_value)
+    
+    
