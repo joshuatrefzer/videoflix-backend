@@ -2,7 +2,7 @@ from django.db import models
 from django_resized import ResizedImageField
 from datetime import date
 from rest_framework import viewsets
-from ..users.models import CustomUser
+from users.models import CustomUser
 
 from .enum import VideoGenre
 
