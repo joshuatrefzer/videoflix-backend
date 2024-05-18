@@ -35,7 +35,7 @@ class VideoView(APIView):
     @method_decorator(cache_page(CACHE_TTL))
     def get(self, request):
         try:
-            videos = Video.objects.all()
+            videos = Video.objects.filter(is_validated=True)
             serializer = VideoSerializer(videos, many=True)
 
             return Response(serializer.data)
