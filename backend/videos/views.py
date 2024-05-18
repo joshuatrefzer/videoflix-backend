@@ -13,10 +13,11 @@ from rest_framework.decorators import api_view
 from django.conf import settings
 from django.core.cache.backends.base import DEFAULT_TIMEOUT
 from django.views.decorators.cache import cache_page
-from .models import Video
-from .serializers import VideoSerializer
+from .models import Video, FavoriteList
+from .serializers import FavoriteListSerializer, VideoSerializer
 from rest_framework.permissions import IsAuthenticated
-from django.contrib.postgres.search import SearchQuery
+from rest_framework import viewsets
+
 
 
 CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
@@ -76,3 +77,7 @@ class SearchView(APIView):
         return Video.objects.filter(title__icontains=search_value)
     
     
+    
+class FavoriteListViewSet(viewsets.ModelViewSet):
+    queryset = FavoriteList.objects.all()
+    serializer_class = FavoriteListSerializer

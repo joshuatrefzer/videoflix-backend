@@ -19,14 +19,19 @@ from django.urls import path
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from videos.views import VideoView, SearchView
+from videos.views import VideoView, SearchView, FavoriteListViewSet
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from rest_framework.routers import DefaultRouter
+
+router = DefaultRouter()
+router.register(r'favorites', FavoriteListViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('django-rq/', include('django_rq.urls')),
     path("__debug__/", include("debug_toolbar.urls")),
     path('users/', include('users.urls')),
+    path('favorites/', include(router.urls), name='favorite-list'), 
     path('api/videos/', VideoView.as_view(), name='get_videos'),
     path('api/upload/' , VideoView.as_view(), name='upload'),
     path('api/videos/search/' , SearchView.as_view(), name='search'),

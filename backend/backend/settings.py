@@ -46,6 +46,7 @@ ALLOWED_HOSTS = [
     "https://joshua-trefzer.developerakademie.org",
     "https://videoflix.joshuatrefzer.de" ,
     "videoflix.joshuatrefzer.de",
+    # "127.0.0.1"
 ]
 
 CLIENT_BASE_URL = "https://videoflix.joshuatrefzer.de" #"http://localhost:4200"
@@ -190,6 +191,7 @@ DATABASES = {
         "PORT": "5432",
     }
 }
+
 
 CSRF_TRUSTED_ORIGINS = [
     "https://joshua-trefzer.developerakademie.org",
