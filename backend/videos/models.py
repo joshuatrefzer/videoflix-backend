@@ -16,7 +16,7 @@ class Video(models.Model):
     description =  models.CharField(max_length = 500)
     genre = models.CharField(max_length=20, choices=generate_genre_choices())
     actors =  models.CharField(max_length = 100)
-    thumbnail = ResizedImageField(force_format="WEBP", size=[150, None], quality=75, upload_to="thumbnails", blank=True, null=True)
+    thumbnail = ResizedImageField(force_format="WEBP", size=[500, None], quality=75, upload_to="thumbnails", blank=True, null=True)
     video_file =  models.FileField(upload_to='videos', blank=True, null=True)
     is_validated = models.BooleanField(default=False)
     
