@@ -86,8 +86,10 @@ class FavoriteListViewSet(viewsets.ModelViewSet):
     
     
 class FavoriteListView(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
     
-    def get_favorite_list(request):
+    def post(request):
         if request.method == 'POST':
             user_id = request.POST.get('user_id')
             
