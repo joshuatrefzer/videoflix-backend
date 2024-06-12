@@ -103,9 +103,7 @@ class FavoriteListView(APIView):
             return Response({'error': 'An error occurred while retrieving the favorite list.'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         
         if not favorite_list:
-            return Response({'error': 'No list for this user exists'}, status=status.HTTP_400_BAD_REQUEST)
-            
-            
+            favorite_list = FavoriteList.objects.create(owner=user)
             
         favorite_videos = favorite_list.favorites.all()
             
