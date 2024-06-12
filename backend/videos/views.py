@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
@@ -13,6 +13,8 @@ from rest_framework.decorators import api_view
 from django.conf import settings
 from django.core.cache.backends.base import DEFAULT_TIMEOUT
 from django.views.decorators.cache import cache_page
+
+from users.models import CustomUser
 from .models import Video, FavoriteList
 from .serializers import FavoriteListSerializer, VideoSerializer
 from rest_framework.permissions import IsAuthenticated
@@ -81,3 +83,36 @@ class SearchView(APIView):
 class FavoriteListViewSet(viewsets.ModelViewSet):
     queryset = FavoriteList.objects.all()
     serializer_class = FavoriteListSerializer
+    
+    
+    
+def get_favorite_list(request):
+    if request.method == 'POST':
+        user_id = request.POST.get('user_id')
+        
+        if not user_id:
+            return Response({"error": "user_id is required for this view"}, status=status.HTTP_400_BAD_REQUEST)
+        
+        user = get_object_or_404(CustomUser, id=user_id)
+        
+        favorite_list = FavoriteList.objects.filter(owner=user).first()
+        if not favorite_list:
+            return Response({'error': 'No List for this user existing'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        favorite_videos = favorite_list.favorites.all()
+        
+        favorite_videos_serializer = VideoSerializer(favorite_videos, many=True)
+        favorite_list_serializer = FavoriteListSerializer(favorite_list) 
+        
+        data = {
+            "favorite_videos": favorite_videos_serializer.data,
+            "favorite_list": favorite_list_serializer.data
+        }
+        
+        return Response(data)  
+
+    return Response({"error": "Invalid request method"}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
+        
+        
+    
+        

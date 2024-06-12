@@ -8,7 +8,7 @@ class VideoSerializer(serializers.ModelSerializer):
         fields = '__all__'
         
 class FavoriteListSerializer(serializers.ModelSerializer):
-    owner = serializers.StringRelatedField()  # Zeigt den Besitzer als String an
+    owner = serializers.StringRelatedField() 
     favorites = serializers.PrimaryKeyRelatedField(many=True, queryset=Video.objects.all())
 
     class Meta:
