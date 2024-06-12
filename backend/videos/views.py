@@ -90,36 +90,34 @@ class FavoriteListView(APIView):
     permission_classes = [IsAuthenticated]
     
     def post(self, request, *args, **kwargs):
-        if request.method == 'POST':
-            user_id = request.POST.get('user_id')
-            
-            if not user_id:
-                return Response({"error": "user_id is required for this view"}, status=status.HTTP_400_BAD_REQUEST)
-            
-            user = get_object_or_404(CustomUser, id=user_id)
-            try:
-                favorite_list = FavoriteList.objects.filter(owner=user).first()
-            except Exception as e:
-                return Response({'error': 'An error occurred while retrieving the favorite list.'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         
-            if not favorite_list:
-                return Response({'error': 'No list for this user exists'}, status=status.HTTP_400_BAD_REQUEST)
+        user_id = request.data.get('user_id')
+            
+        if not user_id:
+            return Response({"error": "user_id is required for this view"}, status=status.HTTP_400_BAD_REQUEST)
+            
+        user = get_object_or_404(CustomUser, id=user_id)
+        try:
+            favorite_list = FavoriteList.objects.filter(owner=user).first()
+        except Exception as e:
+            return Response({'error': 'An error occurred while retrieving the favorite list.'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
+        if not favorite_list:
+            return Response({'error': 'No list for this user exists'}, status=status.HTTP_400_BAD_REQUEST)
             
             
             
-            favorite_videos = favorite_list.favorites.all()
+        favorite_videos = favorite_list.favorites.all()
             
-            favorite_videos_serializer = VideoSerializer(favorite_videos, many=True)
-            favorite_list_serializer = FavoriteListSerializer(favorite_list) 
+        favorite_videos_serializer = VideoSerializer(favorite_videos, many=True)
+        favorite_list_serializer = FavoriteListSerializer(favorite_list) 
             
-            data = {
-                "favorite_videos": favorite_videos_serializer.data,
-                "favorite_list": favorite_list_serializer.data
-            }
+        data = {
+            "favorite_videos": favorite_videos_serializer.data,
+            "favorite_list": favorite_list_serializer.data
+        }
             
-            return Response(data)  
-
-        return Response({"error": "Invalid request method"}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
+        return Response(data)  
         
         
     
