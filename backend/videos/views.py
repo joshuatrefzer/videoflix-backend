@@ -89,7 +89,7 @@ class FavoriteListView(APIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
     
-    def post(request):
+    def post(self, request, *args, **kwargs):
         if request.method == 'POST':
             user_id = request.POST.get('user_id')
             
