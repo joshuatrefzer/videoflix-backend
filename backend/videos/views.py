@@ -97,10 +97,15 @@ class FavoriteListView(APIView):
                 return Response({"error": "user_id is required for this view"}, status=status.HTTP_400_BAD_REQUEST)
             
             user = get_object_or_404(CustomUser, id=user_id)
-            
-            favorite_list = FavoriteList.objects.filter(owner=user).first()
+            try:
+                favorite_list = FavoriteList.objects.filter(owner=user).first()
+            except Exception as e:
+                return Response({'error': 'An error occurred while retrieving the favorite list.'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
             if not favorite_list:
-                return Response({'error': 'No List for this user existing'}, status=status.HTTP_400_BAD_REQUEST)
+                return Response({'error': 'No list for this user exists'}, status=status.HTTP_400_BAD_REQUEST)
+            
+            
             
             favorite_videos = favorite_list.favorites.all()
             
