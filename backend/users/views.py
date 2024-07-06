@@ -60,12 +60,12 @@ def register(request):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-
-
 def generate_token():
     token_length = 32
     token = secrets.token_hex(token_length)
     return token
+
+
 
 
 @api_view(['GET'])
@@ -120,23 +120,21 @@ def logout(request):
 
 @api_view(['POST'])
 def delete_user(request):
-    # Extrahiere das Token aus dem Authorization-Header
     token_key = request.headers.get('Authorization').split()[1]
 
     try:
-        # Versuche, das Token im Backend zu finden
         token = Token.objects.get(key=token_key)
     except Token.DoesNotExist:
         return Response({"detail": "Invalid token."}, status=status.HTTP_400_BAD_REQUEST)
 
-    # Lösche das Token, um es ungültig zu machen
     token.delete()
 
     try:
-        # Versuche, den Benutzer zu finden und zu löschen
         user = CustomUser.objects.get(id=token.user_id)
         user.delete()
     except CustomUser.DoesNotExist:
         return Response({"detail": "User not found."}, status=status.HTTP_400_BAD_REQUEST)
 
     return Response({"detail": "User deleted successfully."})
+
+
