@@ -190,7 +190,7 @@ class VideoSignalTests(TestCase):
 
 class VideoSignalTests(TestCase):
 
-    @patch("myapp.signals.default_storage")
+    @patch("signals.default_storage")
     def test_auto_delete_file_on_delete_signal(self, mock_default_storage):
         mock_delete = mock_default_storage.delete
 
@@ -210,7 +210,7 @@ class VideoSignalTests(TestCase):
 
 class VideoSignalTests(TestCase):
 
-    @patch("myapp.signals.django_rq")
+    @patch("signals.django_rq")
     def test_video_post_save_signal(self, mock_django_rq):
         mock_queue = mock_django_rq.get_queue.return_value
         mock_enqueue = mock_queue.enqueue
