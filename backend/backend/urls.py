@@ -32,7 +32,6 @@ urlpatterns = [
     path("__debug__/", include("debug_toolbar.urls")),
     path('', include(router.urls)),
     path('users/', include('users.urls')),
-    # path('favorites/', include(router.urls), name='favorites'), 
     path('favorite_list/', FavoriteListView.as_view(), name='favorite-list'), 
     path('api/videos/', VideoView.as_view(), name='get_videos'),
     path('api/upload/' , VideoView.as_view(), name='upload'),

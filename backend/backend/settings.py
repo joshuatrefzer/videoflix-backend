@@ -46,10 +46,9 @@ ALLOWED_HOSTS = [
     "https://joshua-trefzer.developerakademie.org",
     "https://videoflix.joshuatrefzer.de" ,
     "videoflix.joshuatrefzer.de",
-    # "127.0.0.1"
 ]
 
-CLIENT_BASE_URL = "https://videoflix.joshuatrefzer.de" #"http://localhost:4200"
+CLIENT_BASE_URL = "https://videoflix.joshuatrefzer.de" 
 
 CORS_ALLOWED_HOSTS = [
     "localhost",
@@ -75,7 +74,6 @@ DEFAULT_FROM_EMAIL = os.getenv("DEVMAIL")
 EMAIL_HOST_USER = os.getenv("DEVMAIL")
 EMAIL_HOST_PASSWORD = os.getenv("DEVPW")
 
-# Application definition
 
 CACHES = {
     "default": {
@@ -105,8 +103,7 @@ INSTALLED_APPS = [
 ]
 
 REST_FRAMEWORK = {
-    # Use Django's standard `django.contrib.auth` permissions,
-    # or allow read-only access for unauthenticated users.
+    
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework.authentication.TokenAuthentication",
         "rest_framework.authentication.BasicAuthentication",
@@ -170,15 +167,6 @@ TEMPLATES = [
 WSGI_APPLICATION = "backend.wsgi.application"
 
 
-# Database
-# https://docs.djangoproject.com/en/5.0/ref/settings/#databases
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
 
 DATABASES = {
     "default": {
@@ -187,7 +175,6 @@ DATABASES = {
         "USER": "myuser",
         "PASSWORD": "auschoj34",
         "HOST": "localhost",
-        # "PORT": "5433",
         "PORT": "5432",
     }
 }

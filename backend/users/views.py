@@ -1,14 +1,10 @@
 from django.shortcuts import redirect, render
 import secrets
-
-# Create your views here.
-# users/views.py
 from django.shortcuts import get_object_or_404
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
-
 from backend.settings import CLIENT_BASE_URL
 from .models import CustomUser
 from django.contrib.auth import authenticate
@@ -27,9 +23,7 @@ def register(request):
     serializer = UserSerializer(data=request.data)
     
     if serializer.is_valid():
-        
         user = serializer.save()
-        
         user.set_password(request.data['password'])
         user.is_activated = False
         user.first_name = request.data['first_name']
@@ -37,7 +31,7 @@ def register(request):
         user.username = request.data['username']
         user.confirmation_token = generate_token()
         user.save()
-
+        
         # Render HTML template
         subject = 'Activate Your Account'
         context = {'user': user, 'activation_link': f'{settings.HOST_BACKEND_URL}/users/activate/{user.confirmation_token}/'}
@@ -53,7 +47,6 @@ def register(request):
             usermail = user.email
             user.delete()
             return Response({'error' :f'Failed to send mail to: {usermail}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-            
         
         return Response({'success': 'Registration successful. A confirmation email has been sent.'}, status=status.HTTP_201_CREATED)
 
@@ -64,7 +57,6 @@ def generate_token():
     token_length = 32
     token = secrets.token_hex(token_length)
     return token
-
 
 
 
@@ -79,12 +71,9 @@ def activate_account(request, confirmation_token):
     return redirect_to_success_site()
     
 
-
 def redirect_to_success_site():
     success_frontend_url = CLIENT_BASE_URL + '/success'
     return redirect(success_frontend_url)
-
-
 
 
 @api_view(['POST'])
@@ -136,5 +125,3 @@ def delete_user(request):
         return Response({"detail": "User not found."}, status=status.HTTP_400_BAD_REQUEST)
 
     return Response({"detail": "User deleted successfully."})
-
-
