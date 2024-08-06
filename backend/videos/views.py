@@ -76,7 +76,7 @@ class SearchView(APIView):
             return Response("Search value not provided", status=status.HTTP_400_BAD_REQUEST)
        
     def search_videos(self, search_value):
-        return Video.objects.filter(title__icontains=search_value)
+        return Video.objects.filter(title__icontains=search_value, is_validated=True)
     
     
     
