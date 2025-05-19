@@ -34,7 +34,6 @@ HOST_BACKEND_URL = "https://joshua-trefzer.developerakademie.org"
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
-
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = "django-insecure-zv*r+2ol!&m#cd8g9^@_rqnang&p9&=rfmfnp6@f6l8z_&zv5c"
 
@@ -46,6 +45,7 @@ ALLOWED_HOSTS = [
     "https://joshua-trefzer.developerakademie.org",
     "https://videoflix.joshuatrefzer.de" ,
     "videoflix.joshuatrefzer.de",
+    "localhost"
 ]
 
 CLIENT_BASE_URL = "https://videoflix.joshuatrefzer.de" 
