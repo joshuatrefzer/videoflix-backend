@@ -1,0 +1,44 @@
+version: '3.9'
+
+services:
+  web:
+    build: .
+    command: gunicorn backend.wsgi:application --bind 0.0.0.0:8080
+    volumes:
+      - .:/code
+    ports:
+      - "8080:8080"   
+    env_file:
+      - .env
+    depends_on:
+      - db
+      - redis
+
+  rqworker:
+    build: .
+    command: python manage.py rqworker
+    volumes:
+      - .:/code
+    env_file:
+      - .env
+    depends_on:
+      - redis
+      - db
+
+  db:
+    image: postgres:15
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    ports:
+      - "5430:5432"
+ 
+    env_file:
+      - .env
+    restart: always
+
+  redis:
+    image: redis:7
+    restart: always
+
+volumes:
+  postgres_data:
