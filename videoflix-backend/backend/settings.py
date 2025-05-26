@@ -28,8 +28,8 @@ CACHE_TTL = 60 * 15
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-BASE_URL =  "http://localhost:8080"
-HOST_BACKEND_URL = "http://localhost:8080"
+BASE_URL =  "https://videoflix.joshuatrefzer-backend.com"
+HOST_BACKEND_URL = "https://videoflix.joshuatrefzer-backend.com"
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -46,7 +46,7 @@ ALLOWED_HOSTS = [
     "localhost",
 ]
 
-CLIENT_BASE_URL = "http://localhost:4200" 
+CLIENT_BASE_URL = "https://videoflix.joshuatrefzer.de"
 
 
 CORS_ALLOWED_ORIGINS = [
