@@ -44,6 +44,7 @@ ALLOWED_HOSTS = [
     "videoflix.joshuatrefzer.de",
     "http://localhost:4200",
     "localhost",
+    "videoflix.joshuatrefzer-backend.com"
 ]
 
 CLIENT_BASE_URL = "https://videoflix.joshuatrefzer.de"
