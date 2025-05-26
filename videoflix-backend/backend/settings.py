@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+from corsheaders.defaults import default_headers
+
 import os
 
 
@@ -26,8 +28,8 @@ CACHE_TTL = 60 * 15
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-BASE_URL =  "http://localhost:8000"
-HOST_BACKEND_URL = "https://joshua-trefzer.developerakademie.org"
+BASE_URL =  "http://localhost:8080"
+HOST_BACKEND_URL = "http://localhost:8080"
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -38,29 +40,27 @@ SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "unsafe-key")
 DEBUG = os.getenv("DJANGO_DEBUG", "False") == "True"
 
 ALLOWED_HOSTS = [
-    "joshua-trefzer.developerakademie.org",
-    "https://joshua-trefzer.developerakademie.org",
     "https://videoflix.joshuatrefzer.de" ,
     "videoflix.joshuatrefzer.de",
-    "localhost"
-]
-
-CLIENT_BASE_URL = "https://videoflix.joshuatrefzer.de" 
-
-CORS_ALLOWED_HOSTS = [
+    "http://localhost:4200",
     "localhost",
-    "joshua-trefzer.developerakademie.org",
-    "https://videoflix.joshuatrefzer.de" ,
-    "videoflix.joshuatrefzer.de",
 ]
+
+CLIENT_BASE_URL = "http://localhost:4200" 
 
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:4200",
-    "https://localhost",
     "https://videoflix.joshuatrefzer.de" ,
 ]
 
+CORS_ALLOW_CREDENTIALS = True
+
+CORS_ALLOW_HEADERS = list(default_headers) + [
+    "X-CSRFToken",
+]
+
+CORS_EXPOSE_HEADERS = ["Content-Disposition"]
 
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
@@ -116,9 +116,9 @@ AUTH_USER_MODEL = "users.CustomUser"
 AUTHENTICATION_BACKENDS = ["users.backends.EmailBackend"]
 
 MIDDLEWARE = [
-    "debug_toolbar.middleware.DebugToolbarMiddleware",
-    "corsheaders.middleware.CorsMiddleware",
+    "corsheaders.middleware.CorsMiddleware",  
     "django.middleware.security.SecurityMiddleware",
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
