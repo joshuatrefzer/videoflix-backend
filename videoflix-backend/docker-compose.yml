@@ -14,16 +14,24 @@ services:
       - db
       - redis
 
-  rqworker:
-    build: .
-    command: python manage.py rqworker
-    volumes:
-      - .:/code
-    env_file:
-      - .env
-    depends_on:
-      - redis
-      - db
+    rqworker:
+      build: .
+      command: sh -c "
+        echo 'Warte auf Migrationen...';
+        while ! python manage.py showmigrations | grep '\[X\] users'; do
+          sleep 2;
+        done;
+        echo 'Migrationen abgeschlossen. Starte Worker...';
+        python manage.py rqworker"
+      
+      volumes:
+        - .:/code
+      env_file:
+        - .env
+      depends_on:
+        - redis
+        - db
+
 
   db:
     image: postgres:15
