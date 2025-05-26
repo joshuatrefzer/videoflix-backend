@@ -17,13 +17,7 @@ services:
 
   rqworker:
     build: .
-    command: sh -c "
-      echo 'Warte auf Migrationen...';
-      while ! python manage.py showmigrations | grep '\[X\] users'; do
-        sleep 2;
-      done;
-      echo 'Migrationen abgeschlossen. Starte Worker...';
-      python manage.py rqworker"
+    command: python manage.py rqworker
       
     volumes:
       - .:/code
