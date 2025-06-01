@@ -11,8 +11,6 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
-from corsheaders.defaults import default_headers
-
 import os
 
 
@@ -40,8 +38,7 @@ SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "unsafe-key")
 DEBUG = os.getenv("DJANGO_DEBUG", "False") == "True"
 
 ALLOWED_HOSTS = [
-    "https://videoflix.joshuatrefzer.de" ,
-    "videoflix.joshuatrefzer.de",
+    "videoflix.joshuatrefzer.de" ,
     "http://localhost:4200",
     "localhost",
     "videoflix.joshuatrefzer-backend-apis.site",
@@ -50,11 +47,6 @@ ALLOWED_HOSTS = [
 
 CLIENT_BASE_URL = "https://videoflix.joshuatrefzer.de"
 
-CSRF_TRUSTED_ORIGINS = [
-    "https://videoflix.joshuatrefzer-backend-apis.site",
-]
-
-
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:4200",
     "https://videoflix.joshuatrefzer.de" ,
@@ -62,10 +54,6 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 CORS_ALLOW_CREDENTIALS = True
-
-CORS_ALLOW_HEADERS = list(default_headers) + [
-    "X-CSRFToken",
-]
 
 CORS_EXPOSE_HEADERS = ["Content-Disposition"]
 
@@ -185,7 +173,8 @@ DATABASES = {
 
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://joshua-trefzer.developerakademie.org",
+    "https://videoflix.joshuatrefzer.de"
+    "https://videoflix.joshuatrefzer-backend-apis.site",
 ]
 
 
