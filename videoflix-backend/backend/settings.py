@@ -28,8 +28,8 @@ CACHE_TTL = 60 * 15
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-BASE_URL =  "https://videoflix.joshuatrefzer-backend.com"
-HOST_BACKEND_URL = "https://videoflix.joshuatrefzer-backend.com"
+BASE_URL =  "https://videoflix.joshuatrefzer-backend-apis.site"
+HOST_BACKEND_URL = "https://videoflix.joshuatrefzer-backend-apis.site"
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -44,7 +44,7 @@ ALLOWED_HOSTS = [
     "videoflix.joshuatrefzer.de",
     "http://localhost:4200",
     "localhost",
-    "https://videoflix.joshuatrefzer-apis.site"
+    "https://videoflix.joshuatrefzer-backend-apis.site"
 ]
 
 CLIENT_BASE_URL = "https://videoflix.joshuatrefzer.de"
@@ -53,7 +53,7 @@ CLIENT_BASE_URL = "https://videoflix.joshuatrefzer.de"
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:4200",
     "https://videoflix.joshuatrefzer.de" ,
-    "https://videoflix.joshuatrefzer-apis.site"
+    "https://videoflix.joshuatrefzer-backend-apis.site"
 ]
 
 CORS_ALLOW_CREDENTIALS = True
