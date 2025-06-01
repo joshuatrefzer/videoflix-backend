@@ -44,7 +44,7 @@ ALLOWED_HOSTS = [
     "videoflix.joshuatrefzer.de",
     "http://localhost:4200",
     "localhost",
-    "videoflix.joshuatrefzer-backend-apis.site"
+    "https://videoflix.joshuatrefzer-apis.site"
 ]
 
 CLIENT_BASE_URL = "https://videoflix.joshuatrefzer.de"
@@ -53,7 +53,7 @@ CLIENT_BASE_URL = "https://videoflix.joshuatrefzer.de"
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:4200",
     "https://videoflix.joshuatrefzer.de" ,
-    "videoflix.joshuatrefzer-apis.site"
+    "https://videoflix.joshuatrefzer-apis.site"
 ]
 
 CORS_ALLOW_CREDENTIALS = True
