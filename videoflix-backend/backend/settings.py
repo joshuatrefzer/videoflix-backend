@@ -50,6 +50,10 @@ ALLOWED_HOSTS = [
 
 CLIENT_BASE_URL = "https://videoflix.joshuatrefzer.de"
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://videoflix.joshuatrefzer-backend-apis.site",
+]
+
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:4200",
