@@ -2,7 +2,6 @@
 
 This is a scalable video processing backend built with Django and containerized using Docker. It supports video uploads, automatic transcoding into multiple resolutions via background tasks, user authentication with email verification, and performance optimization through Redis-based caching.
 
----
 
 ## Features
 
@@ -14,7 +13,6 @@ This is a scalable video processing backend built with Django and containerized 
 - Fully containerized using **Docker** and **Docker Compose**
 - Environment-based configuration via `.env` file
 
----
 
 ## Tech Stack
 
@@ -25,7 +23,6 @@ This is a scalable video processing backend built with Django and containerized 
 - **Web Server:** Gunicorn
 - **Deployment:** Docker & Docker Compose
 
----
 
 ## Getting Started
 
@@ -51,7 +48,6 @@ docker-compose up --build
 | PostgreSQL | localhost:5430 |
 | Redis | internal (6379) |
 
----
 
 ## Project Structure
 
@@ -69,7 +65,6 @@ KopierenBearbeiten
 
 ```
 
----
 
 ## Environment Configuration
 
@@ -92,7 +87,6 @@ EMAIL_USE_TLS=True
 
 ```
 
----
 
 ## Docker Overview
 
@@ -116,7 +110,6 @@ Defines the following services:
 > Ensure SMTP credentials are correctly configured in the .env file.
 > 
 
----
 
 ## Key Dependencies
 
@@ -127,7 +120,6 @@ Defines the following services:
 - `gunicorn`: Production WSGI server
 - `psycopg2-binary`: PostgreSQL adapter
 
----
 
 ## Common Commands
 
@@ -163,7 +155,6 @@ psql -h localhost -p 5430 -U postgres
 
 ```
 
----
 
 ## Security Notes for Production
 
