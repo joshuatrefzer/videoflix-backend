@@ -173,7 +173,7 @@ DATABASES = {
 
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://videoflix.joshuatrefzer.de"
+    "https://videoflix.joshuatrefzer.de",
     "https://videoflix.joshuatrefzer-backend-apis.site",
 ]
 
